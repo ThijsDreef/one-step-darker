@@ -24,13 +24,14 @@ public class PlayerBehaviour : MonoBehaviour {
 
     void Start() {
         currentPlayerState = playerState.idle;
-        targetPosition = new Vector3(5, 0, 5);
+        //targetPosition = new Vector3(5, 0, 5);
        // StartCoroutine(PlayerStructure());
     }
 
     void Update() {
         if(currentPlayerState == playerState.moving) {
             //Debug.Log("Moving");
+            //Debug.Log(targetPosition);
             PlayerWalk();
             float distance = Vector3.Distance(transform.position, targetPosition);
             if (distance < 0.1f) {
@@ -64,11 +65,10 @@ public class PlayerBehaviour : MonoBehaviour {
     public void setTurnSide() {
         Vector3 cross = Vector3.Cross(transform.rotation * Vector3.forward, targetRotation * Vector3.forward);
         facingRight = cross.y < 0;
-        Debug.Log(facingRight);
     }
 
     //For actual useage in game
-    public void SetTarget(UnityEngine.Vector3 position) {
+    public void SetTarget(Vector3 position) {
         targetPosition = position;
         setRotationTarget();
         setTurnSide();

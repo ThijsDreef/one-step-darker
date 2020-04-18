@@ -7,6 +7,7 @@ public enum LevelTypes {
     EMPTY,
     LADDER,
     ROCK,
+    CRATE,
     NR
 }
 

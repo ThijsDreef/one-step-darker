@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class GameGrid : MonoBehaviour {
-    private Interactable[][] grid;
+    public Interactable[][] grid;
 
     [SerializeField]
     private float scale;
@@ -24,6 +24,8 @@ public class GameGrid : MonoBehaviour {
             for (int y = 0; y < level[x].Length; y++) {
                 GameObject t = Instantiate(levelObjects[(int)level[x][y]], new Vector3(scale * (x), 0, scale * (y)), Quaternion.identity);
                 grid[x][y] = t.GetComponent<Interactable>();
+                grid[x][y]?.setGrid(this);
+
                 t.transform.parent = this.transform;
                 t.transform.localScale *= scale;
             }
@@ -31,18 +33,18 @@ public class GameGrid : MonoBehaviour {
     }
 
     public Vector2Int convertPosToGrid(Vector3 pos) {
-        return new Vector2Int(Mathf.FloorToInt(pos.x / scale), Mathf.FloorToInt(pos.z / scale));
+        return new Vector2Int(Mathf.RoundToInt(pos.x / scale), Mathf.RoundToInt(pos.z / scale));
     }
 
     public Vector3 convertGridPosToWorld(Vector2Int to) {
-        return new Vector3(to.x * scale, scale, to.y * scale);
+        return new Vector3(to.x * scale, 1, to.y * scale);
     }
 
-    public bool checkMove(Vector2Int to) {
+    public bool checkMove(Vector2Int to, GameObject o) {
         if (!checkBounds(to)) return false;
         Interactable t = grid[to.x][to.y];
         if (!t) return true;
-        t.interact();
+        t.interact(o);
         return t.isFree();
     }
 }

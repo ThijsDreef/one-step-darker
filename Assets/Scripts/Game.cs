@@ -7,9 +7,9 @@ public class Game : MonoBehaviour {
     private TextAsset levelFile;
 
     [SerializeField]
-    private GameObject player;
+    private PlayerBehaviour player;
 
-    GameGrid grid;
+    private GameGrid grid;
 
 
     public void setLevel(TextAsset asset) {
@@ -25,31 +25,30 @@ public class Game : MonoBehaviour {
     }
 
     // Update is called once per frame
-    void Update() { 
+    void Update() {
+        if (player.currentPlayerState != PlayerBehaviour.playerState.idle) return;
         if (Input.GetKeyUp(KeyCode.D)) {
-            if (grid.checkMove(grid.convertPosToGrid(player.transform.position) + new Vector2Int(1, 0))) {
-                player.transform.position = grid.convertGridPosToWorld(grid.convertPosToGrid(player.transform.position) + new Vector2Int(1, 0));
+            if (grid.checkMove(grid.convertPosToGrid(player.transform.position) + new Vector2Int(1, 0), player.gameObject)) {
+                player.SetTarget(grid.convertGridPosToWorld(grid.convertPosToGrid(player.transform.position) + new Vector2Int(1, 0)));
+                player.moveTo();
             }
         }
-        if (Input.GetKeyUp(KeyCode.A))
-        {
-            if (grid.checkMove(grid.convertPosToGrid(player.transform.position) + new Vector2Int(-1, 0)))
-            {
-                player.transform.position = grid.convertGridPosToWorld(grid.convertPosToGrid(player.transform.position) + new Vector2Int(-1, 0));
+        if (Input.GetKeyUp(KeyCode.A)) {
+            if (grid.checkMove(grid.convertPosToGrid(player.transform.position) + new Vector2Int(-1, 0), player.gameObject)) {
+                player.SetTarget(grid.convertGridPosToWorld(grid.convertPosToGrid(player.transform.position) + new Vector2Int(-1, 0)));
+                player.moveTo();
             }
         }
-        if (Input.GetKeyUp(KeyCode.W))
-        {
-            if (grid.checkMove(grid.convertPosToGrid(player.transform.position) + new Vector2Int(0, 1)))
-            {
-                player.transform.position = grid.convertGridPosToWorld(grid.convertPosToGrid(player.transform.position) + new Vector2Int(0, 1));
+        if (Input.GetKeyUp(KeyCode.W)) {
+            if (grid.checkMove(grid.convertPosToGrid(player.transform.position) + new Vector2Int(0, 1), player.gameObject)) {
+                player.SetTarget(grid.convertGridPosToWorld(grid.convertPosToGrid(player.transform.position) + new Vector2Int(0, 1)));
+                player.moveTo();
             }
         }
-        if (Input.GetKeyUp(KeyCode.S))
-        {
-            if (grid.checkMove(grid.convertPosToGrid(player.transform.position) + new Vector2Int(0, -1)))
-            {
-                player.transform.position = grid.convertGridPosToWorld(grid.convertPosToGrid(player.transform.position) + new Vector2Int(0, -1));
+        if (Input.GetKeyUp(KeyCode.S)) {
+            if (grid.checkMove(grid.convertPosToGrid(player.transform.position) + new Vector2Int(0, -1), player.gameObject)) {
+                player.SetTarget(grid.convertGridPosToWorld(grid.convertPosToGrid(player.transform.position) + new Vector2Int(0, -1)));
+                player.moveTo();
             }
         }
     }
