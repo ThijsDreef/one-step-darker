@@ -26,26 +26,26 @@ public class Game : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
-        if (player.currentPlayerState != PlayerBehaviour.playerState.idle) return;
-        if (Input.GetKeyUp(KeyCode.D)) {
+        if (!player.isReadyForNextCommand) return;
+        if (Input.GetKey(KeyCode.D)) {
             if (grid.checkMove(grid.convertPosToGrid(player.transform.position) + new Vector2Int(1, 0), player.gameObject)) {
                 player.SetTarget(grid.convertGridPosToWorld(grid.convertPosToGrid(player.transform.position) + new Vector2Int(1, 0)));
                 player.moveTo();
             }
         }
-        if (Input.GetKeyUp(KeyCode.A)) {
+        if (Input.GetKey(KeyCode.A)) {
             if (grid.checkMove(grid.convertPosToGrid(player.transform.position) + new Vector2Int(-1, 0), player.gameObject)) {
                 player.SetTarget(grid.convertGridPosToWorld(grid.convertPosToGrid(player.transform.position) + new Vector2Int(-1, 0)));
                 player.moveTo();
             }
         }
-        if (Input.GetKeyUp(KeyCode.W)) {
+        if (Input.GetKey(KeyCode.W)) {
             if (grid.checkMove(grid.convertPosToGrid(player.transform.position) + new Vector2Int(0, 1), player.gameObject)) {
                 player.SetTarget(grid.convertGridPosToWorld(grid.convertPosToGrid(player.transform.position) + new Vector2Int(0, 1)));
                 player.moveTo();
             }
         }
-        if (Input.GetKeyUp(KeyCode.S)) {
+        if (Input.GetKey(KeyCode.S)) {
             if (grid.checkMove(grid.convertPosToGrid(player.transform.position) + new Vector2Int(0, -1), player.gameObject)) {
                 player.SetTarget(grid.convertGridPosToWorld(grid.convertPosToGrid(player.transform.position) + new Vector2Int(0, -1)));
                 player.moveTo();

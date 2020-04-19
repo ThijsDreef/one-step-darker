@@ -15,6 +15,7 @@ public class PlayerBehaviour : MonoBehaviour {
     [SerializeField]
     public playerState currentPlayerState;
     public bool facingRight;
+    public bool isReadyForNextCommand = false;
 
     private Vector3 targetPosition;
     private Quaternion targetRotation;
@@ -23,6 +24,7 @@ public class PlayerBehaviour : MonoBehaviour {
     float playerMovementSpeed;
 
     void Start() {
+        isReadyForNextCommand = true;
         currentPlayerState = playerState.idle;
         //targetPosition = new Vector3(5, 0, 5);
        // StartCoroutine(PlayerStructure());
@@ -34,9 +36,12 @@ public class PlayerBehaviour : MonoBehaviour {
             //Debug.Log(targetPosition);
             PlayerWalk();
             float distance = Vector3.Distance(transform.position, targetPosition);
-            if (distance < 0.1f) {
+            if (distance < 0.2f) {
+                isReadyForNextCommand = true;
+            }
+            if(distance < 0.1f) {
                 transform.position = targetPosition;
-                currentPlayerState = playerState.idle;
+                StartCoroutine(SetIdle());
             }
         }
 
@@ -75,6 +80,14 @@ public class PlayerBehaviour : MonoBehaviour {
     }
 
     public void moveTo() {
+        isReadyForNextCommand = false;
         currentPlayerState = playerState.rotating;
+    }
+
+    public IEnumerator SetIdle() {
+        yield return new WaitForSeconds(0.1f);
+        if(isReadyForNextCommand == true) {
+            currentPlayerState = playerState.idle;
+        }
     }
 }
