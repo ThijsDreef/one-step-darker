@@ -9,6 +9,7 @@ public class PlayerBehaviour : MonoBehaviour {
         rotating,
         moving,
         climbing,
+        kick,
         death
     }
 
@@ -16,7 +17,7 @@ public class PlayerBehaviour : MonoBehaviour {
     public playerState currentPlayerState;
     public bool facingRight;
     public bool isReadyForNextCommand = false;
-
+    public bool isKicking = false;
     private Vector3 targetPosition;
     private Quaternion targetRotation;
 
@@ -36,10 +37,10 @@ public class PlayerBehaviour : MonoBehaviour {
             //Debug.Log(targetPosition);
             PlayerWalk();
             float distance = Vector3.Distance(transform.position, targetPosition);
-            if (distance < 0.2f) {
+            if (distance < 0.02f) {
                 isReadyForNextCommand = true;
             }
-            if(distance < 0.1f) {
+            if(distance < 0.01f) {
                 transform.position = targetPosition;
                 StartCoroutine(SetIdle());
             }
@@ -48,12 +49,23 @@ public class PlayerBehaviour : MonoBehaviour {
         if (currentPlayerState == playerState.rotating) {
             //Debug.Log("rotating");
             if (1 - Mathf.Abs(Quaternion.Dot(transform.rotation, targetRotation)) < 0.001f) {
-                currentPlayerState = playerState.moving;
+                if (isKicking) {
+                    currentPlayerState = playerState.kick;
+                }
+                else {
+                    currentPlayerState = playerState.moving;
+                }
             }
         }
 
         if (currentPlayerState == playerState.idle) {
             //Debug.Log("Idle");
+        }
+
+        if(currentPlayerState == playerState.kick) {
+            if (!isKicking) {
+                currentPlayerState = playerState.moving;
+            }
         }
     }
 
@@ -89,5 +101,10 @@ public class PlayerBehaviour : MonoBehaviour {
         if(isReadyForNextCommand == true) {
             currentPlayerState = playerState.idle;
         }
+    }
+
+    public void PlayerPushKick() {
+        isReadyForNextCommand = false;
+        currentPlayerState = playerState.kick;
     }
 }

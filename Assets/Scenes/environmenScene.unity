@@ -147,12 +147,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 91886738}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 1, z: 0}
   m_LocalScale: {x: 10, y: 10, z: 10}
   m_Children: []
-  m_Father: {fileID: 269948854}
-  m_RootOrder: 0
+  m_Father: {fileID: 0}
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!64 &91886740
 MeshCollider:
@@ -277,6 +277,26 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1606877008184977948, guid: 7bb56704f8a4af94da11615e85663f55,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1606877008184977948, guid: 7bb56704f8a4af94da11615e85663f55,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1606877008184977948, guid: 7bb56704f8a4af94da11615e85663f55,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1987063530807860135, guid: 7bb56704f8a4af94da11615e85663f55,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2312492825357146127, guid: 7bb56704f8a4af94da11615e85663f55,
         type: 3}
       propertyPath: m_Name
@@ -335,7 +355,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e897a4b7ae261f4ea87e9f3dea4a1e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levelFile: {fileID: 4900000, guid: 97dd9e3532644db4fb87f83653a1f8ca, type: 3}
+  levelFile:
+  - {fileID: 4900000, guid: 97dd9e3532644db4fb87f83653a1f8ca, type: 3}
+  - {fileID: 4900000, guid: 42633764625d1954a843e5a3c31b3773, type: 3}
+  currentLevel: 0
   player: {fileID: 1401223296}
 --- !u!114 &269948852
 MonoBehaviour:
@@ -369,7 +392,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   colouredLight: {fileID: 1884887036}
   WhiteLight: {fileID: 1551336859}
-  steps: 10
 --- !u!4 &269948854
 Transform:
   m_ObjectHideFlags: 0
@@ -380,8 +402,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 91886739}
+  m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
