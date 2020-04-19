@@ -11,6 +11,7 @@ public class Crate : Interactable {
     }
 
     private IEnumerator pushed() {
+        yield return new WaitForSeconds(1.3f);
         int steps = 100;
         Vector3 step = (targetPosition - this.transform.position) / steps;
         for (int i = 0; i < steps; i++) {
@@ -24,11 +25,14 @@ public class Crate : Interactable {
         Vector2Int dir = pos - grid.convertPosToGrid(player.transform.position);
         canBePushedThatWay = grid.checkMove(pos + dir, this.gameObject) && player.GetComponent<PlayerBehaviour>();
         if (canBePushedThatWay) {
+            player.GetComponent<PlayerBehaviour>().isReadyForNextCommand = false;
+            player.GetComponent<PlayerBehaviour>().isKicking = true;
             targetPosition = grid.convertGridPosToWorld(pos + dir);
             targetPosition.y = 0.0f;
             grid.grid[pos.x][pos.y] = null;
             
             grid.grid[pos.x + dir.x][pos.y + dir.y] = this;
+            player.GetComponent<PlayerBehaviour>().PlayerPushKick();
             StartCoroutine("pushed");
         }
     }
