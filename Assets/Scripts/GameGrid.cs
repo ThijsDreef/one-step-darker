@@ -18,6 +18,11 @@ public class GameGrid : MonoBehaviour {
     }
 
     public void spawnLevel(LevelTypes[][] level) {
+        foreach(Transform t in transform) {
+            Destroy(t.gameObject);
+        }
+
+
         grid = new Interactable[level.Length][];
         for (int x = 0; x < level.Length; x++) {
             grid[x] = new Interactable[level[x].Length];
