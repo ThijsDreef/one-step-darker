@@ -13,7 +13,10 @@ public class Hole : Interactable {
             crate.transform.position += step;
             yield return new WaitForFixedUpdate();
         }
+        Vector2Int pos = grid.convertPosToGrid(this.transform.position);
+        this.grid.grid[pos.x][pos.y] = null;
         SFX.Instance.playSound(SoundType.FALL);
+        
     }
 
     public override bool isFree() {
@@ -21,7 +24,6 @@ public class Hole : Interactable {
     }
     public override void interact(GameObject player) {
         if (!player.GetComponent<PlayerBehaviour>()) {
-            Vector2Int pos = grid.convertPosToGrid(this.transform.position);
             crate = player;
             StartCoroutine(moveBox());
         }

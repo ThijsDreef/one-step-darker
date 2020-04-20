@@ -42,7 +42,7 @@ public class Steps : MonoBehaviour {
     }
     private void Update() {
         source.volume = 0.25f + ((float)steps / maxSteps) * 0.75f;
-        mult += (((float)steps / maxSteps) - mult) * Time.deltaTime;
+        mult += ((((float)Mathf.Clamp(steps, 0, 10) / 10) * 0.5f + (((float)steps/maxSteps) * 0.5f)) - mult) * Time.deltaTime;
         colouredLight.range = colouredMaxLightRange * mult + (Mathf.Sin(Time.time * 0.5f) * 0.5f + 0.5f) * mult;
         WhiteLight.range = maxLightRange * mult + (Mathf.Sin(Time.time * 1.0f + 10.0f) * 0.5f + 0.5f) * 3.0f * mult;
     }
