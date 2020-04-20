@@ -3,17 +3,20 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Lamp : MonoBehaviour {
-    float value = 180;
 
     [SerializeField]
-    float speed;
+    float min = -5;
+    [SerializeField]
+    float max = 5;
 
-    float delta = 10.0f;
+    [SerializeField]
+    float value = 0;
     void Start() {
         
     }
 
     void Update() {
-        transform.rotation = Quaternion.Euler(0, 0, 180);
+        value = Mathf.Lerp(min, max, Mathf.PingPong(Time.time,1 ));
+        transform.rotation = Quaternion.Euler(0, 0, 180 + value);
     }
 }
