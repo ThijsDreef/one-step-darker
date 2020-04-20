@@ -11,7 +11,8 @@ public class Crate : Interactable {
     }
 
     private IEnumerator pushed() {
-        yield return new WaitForSeconds(1.3f);
+        yield return new WaitForSeconds(1.1f);
+        SFX.Instance.playSound(SoundType.PUNCH);
         int steps = 40;
         Vector3 step = (targetPosition - this.transform.position) / steps;
         for (int i = 0; i < steps; i++) {
@@ -25,6 +26,7 @@ public class Crate : Interactable {
         Vector2Int dir = pos - grid.convertPosToGrid(player.transform.position);
         canBePushedThatWay = grid.checkMove(pos + dir, this.gameObject) && player.GetComponent<PlayerBehaviour>();
         if (canBePushedThatWay) {
+
             player.GetComponent<PlayerBehaviour>().isReadyForNextCommand = false;
             player.GetComponent<PlayerBehaviour>().isKicking = true;
             targetPosition = grid.convertGridPosToWorld(pos + dir);

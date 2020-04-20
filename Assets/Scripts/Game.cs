@@ -30,6 +30,7 @@ public class Game : MonoBehaviour {
     }
 
     public void nextLevel() {
+        if (transitionLevel) return;
         transitionLevel = true;
         StartCoroutine(nextLevelStart());
     }
@@ -40,6 +41,7 @@ public class Game : MonoBehaviour {
         player.SetTarget(player.transform.position);
         steps.setSteps(level.steps);
         transitionLevel = false;
+        SFX.Instance.playSound(SoundType.RESPAWN);
     }
 
     public void setLevel(int level) {
@@ -71,11 +73,18 @@ public class Game : MonoBehaviour {
             return;
         }
 
-        if (Input.GetKeyUp(KeyCode.D)) {
+        if (Input.GetKeyUp(KeyCode.R) && !transitionLevel) {
+            setLevel(levelFile[currentLevel]);
+            return;
+        }
+
+        if (Input.GetKey(KeyCode.D)) {
             if (grid.checkMove(grid.convertPosToGrid(player.transform.position) + new Vector2Int(1, 0), player.gameObject)) {
                 steps.stepDown();
                 player.SetTarget(grid.convertGridPosToWorld(grid.convertPosToGrid(player.transform.position) + new Vector2Int(1, 0)));
                 player.moveTo();
+            } else {
+                SFX.Instance.playSound(SoundType.INCORRECT_MOVE);
             }
         }
         if (Input.GetKey(KeyCode.A)) {
@@ -83,6 +92,8 @@ public class Game : MonoBehaviour {
                 steps.stepDown();
                 player.SetTarget(grid.convertGridPosToWorld(grid.convertPosToGrid(player.transform.position) + new Vector2Int(-1, 0)));
                 player.moveTo();
+            } else {
+                SFX.Instance.playSound(SoundType.INCORRECT_MOVE);
             }
         }
         if (Input.GetKey(KeyCode.W)) {
@@ -91,12 +102,17 @@ public class Game : MonoBehaviour {
                 player.SetTarget(grid.convertGridPosToWorld(grid.convertPosToGrid(player.transform.position) + new Vector2Int(0, 1)));
                 player.moveTo();
             }
+            else {
+                SFX.Instance.playSound(SoundType.INCORRECT_MOVE);
+            }
         }
         if (Input.GetKey(KeyCode.S)) {
             if (grid.checkMove(grid.convertPosToGrid(player.transform.position) + new Vector2Int(0, -1), player.gameObject)) {
                 steps.stepDown();
                 player.SetTarget(grid.convertGridPosToWorld(grid.convertPosToGrid(player.transform.position) + new Vector2Int(0, -1)));
                 player.moveTo();
+            } else {
+                SFX.Instance.playSound(SoundType.INCORRECT_MOVE);
             }
         }
     }
