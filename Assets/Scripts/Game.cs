@@ -18,6 +18,8 @@ public class Game : MonoBehaviour {
     private GameGrid grid;
     private Steps steps;
 
+    private bool GamePaused = false;
+
     IEnumerator nextLevelStart() {
         steps.setZero();
 
@@ -42,6 +44,14 @@ public class Game : MonoBehaviour {
         SFX.Instance.playSound(SoundType.RESPAWN);
     }
 
+    public void setLevel(int level) {
+        setLevel(levelFile[level]);
+    }
+
+    public void PauseGame(bool value) {
+        GamePaused = value;
+    }
+
     // Start is called before the first frame update
     void Start() {
         if (!Instance) Instance = this;
@@ -54,9 +64,10 @@ public class Game : MonoBehaviour {
         setLevel(levelFile[currentLevel]);
     }
 
+
     // Update is called once per frame
     void Update() {
-        if (!player.isReadyForNextCommand) return;
+        if (!player.isReadyForNextCommand || GamePaused) return;
         if (!steps.canTakeStep() && !transitionLevel) {
             setLevel(levelFile[currentLevel]);
             return;
