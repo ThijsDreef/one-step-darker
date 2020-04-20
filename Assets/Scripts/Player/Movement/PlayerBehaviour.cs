@@ -37,10 +37,10 @@ public class PlayerBehaviour : MonoBehaviour {
             //Debug.Log(targetPosition);
             PlayerWalk();
             float distance = Vector3.Distance(transform.position, targetPosition);
-            if (distance < 0.02f) {
+            if (distance < 0.002f) {
                 isReadyForNextCommand = true;
             }
-            if(distance < 0.01f) {
+            if(distance < 0.001f) {
                 transform.position = targetPosition;
                 StartCoroutine(SetIdle());
             }
