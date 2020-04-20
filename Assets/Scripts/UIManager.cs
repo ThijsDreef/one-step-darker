@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour {
     [SerializeField]
@@ -22,6 +23,9 @@ public class UIManager : MonoBehaviour {
 
     [SerializeField]
     Game game;
+
+    [SerializeField]
+    Slider musicSlider;
 
     void Start() {
         IsinTheme = true;
@@ -97,5 +101,9 @@ public class UIManager : MonoBehaviour {
         SetMenu(5);
         yield return new WaitForSeconds(5);
         SetMenu(0);
+    }
+
+    public void SetVolume() {
+        AudioListener.volume = musicSlider.value;
     }
 }
