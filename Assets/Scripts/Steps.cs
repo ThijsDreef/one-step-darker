@@ -12,7 +12,7 @@ public class Steps : MonoBehaviour {
     [SerializeField]
     private Light WhiteLight;
 
-    private float mult;
+    public float mult;
     private int steps = 0;
     private int maxSteps = 0;
 
