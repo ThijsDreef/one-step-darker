@@ -6,6 +6,7 @@ public class Steps : MonoBehaviour {
 
     private float maxLightRange;
     private float colouredMaxLightRange;
+    private AudioSource source;
 
     [SerializeField]
     private Light colouredLight;
@@ -35,10 +36,12 @@ public class Steps : MonoBehaviour {
 
     private void Start() {
         mult = 1;
+        source = GetComponent<AudioSource>();
         colouredMaxLightRange = colouredLight.range;
         maxLightRange = WhiteLight.range;
     }
     private void Update() {
+        source.volume = 0.25f + ((float)steps / maxSteps) * 0.75f;
         mult += (((float)steps / maxSteps) - mult) * Time.deltaTime;
         colouredLight.range = colouredMaxLightRange * mult + (Mathf.Sin(Time.time * 0.5f) * 0.5f + 0.5f) * mult;
         WhiteLight.range = maxLightRange * mult + (Mathf.Sin(Time.time * 1.0f + 10.0f) * 0.5f + 0.5f) * 3.0f * mult;

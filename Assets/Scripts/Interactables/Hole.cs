@@ -13,6 +13,7 @@ public class Hole : Interactable {
             crate.transform.position += step;
             yield return new WaitForFixedUpdate();
         }
+        SFX.Instance.playSound(SoundType.FALL);
     }
 
     public override bool isFree() {
