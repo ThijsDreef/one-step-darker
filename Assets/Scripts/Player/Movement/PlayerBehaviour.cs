@@ -54,6 +54,8 @@ public class PlayerBehaviour : MonoBehaviour {
                 }
                 else {
                     currentPlayerState = playerState.moving;
+                    SFX.Instance.playSound(SoundType.WALK);
+
                 }
             }
         }
@@ -63,7 +65,9 @@ public class PlayerBehaviour : MonoBehaviour {
         }
 
         if(currentPlayerState == playerState.kick) {
+
             if (!isKicking) {
+                SFX.Instance.playSound(SoundType.WALK);
                 currentPlayerState = playerState.moving;
             }
         }
