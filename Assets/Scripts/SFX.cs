@@ -47,5 +47,5 @@ public class SFX : MonoBehaviour {
         }
         GetComponent<AudioSource>().PlayOneShot(t);
     }
-
+    
 }
