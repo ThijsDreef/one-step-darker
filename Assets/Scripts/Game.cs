@@ -56,15 +56,14 @@ public class Game : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
-        if (!player.isReadyForNextCommand && !transitionLevel) return;
-        if (!steps.canTakeStep()) {
+        if (!player.isReadyForNextCommand) return;
+        if (!steps.canTakeStep() && !transitionLevel) {
             setLevel(levelFile[currentLevel]);
             return;
         }
 
-        if (Input.GetKeyUp(KeyCode.R)) {
-            currentLevel--;
-            nextLevel();
+        if (Input.GetKeyUp(KeyCode.R) && !transitionLevel) {
+            setLevel(levelFile[currentLevel]);
             return;
         }
 
