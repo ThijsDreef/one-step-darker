@@ -56,13 +56,19 @@ public class Game : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
-        if (!player.isReadyForNextCommand) return;
-        if (!steps.canTakeStep() && !transitionLevel) {
+        if (!player.isReadyForNextCommand && !transitionLevel) return;
+        if (!steps.canTakeStep()) {
             setLevel(levelFile[currentLevel]);
             return;
         }
 
-        if (Input.GetKeyUp(KeyCode.D)) {
+        if (Input.GetKeyUp(KeyCode.R)) {
+            currentLevel--;
+            nextLevel();
+            return;
+        }
+
+        if (Input.GetKey(KeyCode.D)) {
             if (grid.checkMove(grid.convertPosToGrid(player.transform.position) + new Vector2Int(1, 0), player.gameObject)) {
                 steps.stepDown();
                 player.SetTarget(grid.convertGridPosToWorld(grid.convertPosToGrid(player.transform.position) + new Vector2Int(1, 0)));
