@@ -12,11 +12,11 @@ public class Crate : Interactable {
 
     private IEnumerator pushed() {
         yield return new WaitForSeconds(1.3f);
-        int steps = 100;
+        int steps = 40;
         Vector3 step = (targetPosition - this.transform.position) / steps;
         for (int i = 0; i < steps; i++) {
             this.transform.position += step;
-            yield return null;
+            yield return new WaitForFixedUpdate();
         }
     }
 
@@ -30,8 +30,10 @@ public class Crate : Interactable {
             targetPosition = grid.convertGridPosToWorld(pos + dir);
             targetPosition.y = 0.0f;
             grid.grid[pos.x][pos.y] = null;
-            
-            grid.grid[pos.x + dir.x][pos.y + dir.y] = this;
+            bool nextIsHole = grid.grid[pos.x + dir.x][pos.y + dir.y] as Hole;
+            if (!nextIsHole) {
+                grid.grid[pos.x + dir.x][pos.y + dir.y] = this;
+            }
             player.GetComponent<PlayerBehaviour>().PlayerPushKick();
             StartCoroutine("pushed");
         }

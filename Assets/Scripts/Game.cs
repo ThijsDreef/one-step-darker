@@ -37,6 +37,7 @@ public class Game : MonoBehaviour {
         player.transform.position = grid.convertGridPosToWorld(level.playerPosition);
         player.SetTarget(player.transform.position);
         steps.setSteps(level.steps);
+        transitionLevel = false;
     }
 
     // Start is called before the first frame update
