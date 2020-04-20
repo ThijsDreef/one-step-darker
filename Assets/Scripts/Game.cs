@@ -78,7 +78,7 @@ public class Game : MonoBehaviour {
             return;
         }
 
-        if (Input.GetKey(KeyCode.D)) {
+        if (Input.GetKeyDown(KeyCode.D)) {
             if (grid.checkMove(grid.convertPosToGrid(player.transform.position) + new Vector2Int(1, 0), player.gameObject)) {
                 steps.stepDown();
                 player.SetTarget(grid.convertGridPosToWorld(grid.convertPosToGrid(player.transform.position) + new Vector2Int(1, 0)));
@@ -87,7 +87,7 @@ public class Game : MonoBehaviour {
                 SFX.Instance.playSound(SoundType.INCORRECT_MOVE);
             }
         }
-        if (Input.GetKey(KeyCode.A)) {
+        if (Input.GetKeyDown(KeyCode.A)) {
             if (grid.checkMove(grid.convertPosToGrid(player.transform.position) + new Vector2Int(-1, 0), player.gameObject)) {
                 steps.stepDown();
                 player.SetTarget(grid.convertGridPosToWorld(grid.convertPosToGrid(player.transform.position) + new Vector2Int(-1, 0)));
@@ -96,7 +96,7 @@ public class Game : MonoBehaviour {
                 SFX.Instance.playSound(SoundType.INCORRECT_MOVE);
             }
         }
-        if (Input.GetKey(KeyCode.W)) {
+        if (Input.GetKeyDown(KeyCode.W)) {
             if (grid.checkMove(grid.convertPosToGrid(player.transform.position) + new Vector2Int(0, 1), player.gameObject)) {
                 steps.stepDown();
                 player.SetTarget(grid.convertGridPosToWorld(grid.convertPosToGrid(player.transform.position) + new Vector2Int(0, 1)));
@@ -106,7 +106,7 @@ public class Game : MonoBehaviour {
                 SFX.Instance.playSound(SoundType.INCORRECT_MOVE);
             }
         }
-        if (Input.GetKey(KeyCode.S)) {
+        if (Input.GetKeyDown(KeyCode.S)) {
             if (grid.checkMove(grid.convertPosToGrid(player.transform.position) + new Vector2Int(0, -1), player.gameObject)) {
                 steps.stepDown();
                 player.SetTarget(grid.convertGridPosToWorld(grid.convertPosToGrid(player.transform.position) + new Vector2Int(0, -1)));

@@ -1522,6 +1522,12 @@ MonoBehaviour:
   - {fileID: 4900000, guid: 12f4279f96a3227448623a70c76213c0, type: 3}
   - {fileID: 4900000, guid: 1c82301d32fd047428b6a4f817b19820, type: 3}
   - {fileID: 4900000, guid: a7fd50c81e6986747858ae222bfa2d3d, type: 3}
+  - {fileID: 4900000, guid: 40dc055b6febd9e40baaa44cca6766cb, type: 3}
+  - {fileID: 4900000, guid: 47e49fd36597fa1418d19f491270350c, type: 3}
+  - {fileID: 4900000, guid: 4998c114fccebdc4fb9ff002ca760e77, type: 3}
+  - {fileID: 4900000, guid: 202f7f26e7569de4188a028f25b3bbba, type: 3}
+  - {fileID: 4900000, guid: 2bb4ed002eadbf1428a133eefb10167a, type: 3}
+  - {fileID: 4900000, guid: 02533b06f6ca10840bc3ce754e8ce58a, type: 3}
   currentLevel: 0
   player: {fileID: 1401223296}
 --- !u!114 &269948852
