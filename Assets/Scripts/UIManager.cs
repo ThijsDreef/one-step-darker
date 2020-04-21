@@ -97,10 +97,17 @@ public class UIManager : MonoBehaviour {
         IsinTheme = false;
     }
 
-    public void titleScreen() {
+    public void titleScreen() {        
         IsinTheme = true;
+        StartCoroutine(titleScreenFade());
+    }
+
+    IEnumerator titleScreenFade() {
         SetMenu(5);
         EaseMenuIn(5);
+        yield return new WaitForSeconds(5);
+        SetMenu(1);
+        
     }
 
     IEnumerator MainTimer() {
