@@ -6,6 +6,9 @@ public class Game : MonoBehaviour {
     public static Game Instance { get; private set; }
 
     [SerializeField]
+    private UIManager uIManager;
+
+    [SerializeField]
     private TextAsset[] levelFile;
     [SerializeField]
     private int currentLevel = 0;
@@ -25,8 +28,10 @@ public class Game : MonoBehaviour {
 
         yield return new WaitForSeconds(1.7f);
         currentLevel++;
-        if (currentLevel >= levelFile.Length) currentLevel = 0;
-        setLevel(levelFile[currentLevel]);
+        Debug.Log(currentLevel >= levelFile.Length);
+        if (currentLevel >= levelFile.Length) {
+            uIManager.titleScreen();  
+        } else setLevel(levelFile[currentLevel]);
     }
 
     public void nextLevel() {
@@ -46,6 +51,7 @@ public class Game : MonoBehaviour {
 
     public void setLevel(int level) {
         setLevel(levelFile[level]);
+        currentLevel = level;
     }
 
     public void PauseGame(bool value) {

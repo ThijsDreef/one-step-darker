@@ -97,6 +97,12 @@ public class UIManager : MonoBehaviour {
         IsinTheme = false;
     }
 
+    public void titleScreen() {
+        IsinTheme = true;
+        SetMenu(5);
+        EaseMenuIn(5);
+    }
+
     IEnumerator MainTimer() {
         SetMenu(5);
         yield return new WaitForSeconds(5);
